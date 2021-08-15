@@ -56,7 +56,7 @@ class SignUp extends React.Component {
           <input type="text" onChange={(e) => this.changeHandler(e, "userName")} />
         </div>
         <div>
-          <label className="label">password</label>
+          <label className="label">Password</label>
           <input type="text" onChange={(e) => this.changeHandler(e, "password")} />
         </div>
         <button onClick={() => this.submitUserDate()}>Sign In</button>
