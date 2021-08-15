@@ -8,6 +8,11 @@ import React from 'react';
 import SignUp from './SignUp.js';
 import SignIn from './SignIn.js';
 
+const poolData = {
+  // setting ids
+  UserPoolId: '',
+  ClientId: ''
+};
 
 export default function App() {
   return (
@@ -23,15 +28,12 @@ export default function App() {
             </li>
           </ul>
         </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/SignUp">
-            <SignUp />
+            <SignUp poolData={poolData} />
           </Route>
           <Route path="/SignIn">
-            <SignIn />
+            <SignIn poolData={poolData} />
           </Route>
         </Switch>
       </div>

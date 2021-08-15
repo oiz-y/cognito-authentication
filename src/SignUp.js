@@ -3,11 +3,6 @@ import 'cross-fetch/polyfill';
 import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
 import './App.css';
 
-const poolData = {
-  UserPoolId: 'ap-northeast-1_5xRCNGPgo',
-  ClientId: '56ufe6b4pmufnnloun431dqabb'
-};
-
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +22,6 @@ class SignUp extends React.Component {
   }
 
   submitUserDate() {
-    console.log(this.state);
     const attributeList = [];
     const email = {
       Name: 'email',
@@ -36,10 +30,11 @@ class SignUp extends React.Component {
     const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(email);
     attributeList.push(attributeEmail);
 
-    const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    const userPool = new AmazonCognitoIdentity.CognitoUserPool(this.props.poolData);
     const self = this;
     userPool.signUp(this.state.userName, this.state.password, attributeList, null, function (err, result) {
       if (err) {
+        alert('ERROR');
         console.log(err);
         return;
       }
@@ -49,8 +44,8 @@ class SignUp extends React.Component {
     });
   }
 
-  submitAuthCode(e) {
-    const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+  submitAuthCode() {
+    const userPool = new AmazonCognitoIdentity.CognitoUserPool(this.props.poolData);
     const authData = {
       Username: this.state.userName,
       Pool: userPool
@@ -59,6 +54,7 @@ class SignUp extends React.Component {
     const cognitoUser = new AmazonCognitoIdentity.CognitoUser(authData);
     cognitoUser.confirmRegistration(this.state.authCode, true, function (err, result) {
       if (err) {
+        alert('ERROR');
         console.log(err);
         return;
       }
